@@ -1,0 +1,1 @@
+# rails-modular-monolith-example
