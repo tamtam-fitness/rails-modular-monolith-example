@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  api:
+    tty: true
+    stdin_open: true
+    container_name: api
+    environment:
+      MYSQL_HOST: db
+    build:
+      context: ./api/
+      dockerfile: Dockerfile
+      args:
+        RAILS_ENV: development
+        BUNDLE_WITHOUT: ""
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api:/api
+      - bundle:/usr/local/bundle
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    container_name: db-mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: development
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-volume:/var/lib/mysql
+volumes:
+  bundle:
+  db-volume:
