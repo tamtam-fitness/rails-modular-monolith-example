@@ -1,0 +1,30 @@
+source "https://rubygems.org"
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby "3.3.0"
+
+gem "rails", "~> 7.0.5"
+
+gem "mysql2", "~>0.5.6"
+
+gem "puma", ">= 5.0"
+gem 'bootsnap', require: false
+
+gem 'graphql'
+
+gem 'packwerk'
+gem 'packs-rails'
+gem 'packwerk-extensions'
+
+gem "sprockets-rails", "~> 3.4"
+
+group :development, :test do
+  gem 'annotate'
+end
+
+# ref: https://qiita.com/k-penguin-sato/items/07fef2f26fd6339e0e69
+group :development do
+  gem 'graphiql-rails'
+end
+
+
